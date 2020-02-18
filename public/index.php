@@ -13,7 +13,7 @@ $favorite = "potatoes";
 $num = 42;
 require '../src/template/header.php';
 add2(5, 10);
-
+echo "<hr>";
 echo "The number is $num and " . CONSTANT;
 echo "<hr>";
 echo "The number is " . ($num + 10);
