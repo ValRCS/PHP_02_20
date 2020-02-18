@@ -1,0 +1,23 @@
+<?php
+//read file with old value
+$path = 'count.txt';
+$file = fopen($path, 'r');
+$count = fgets($file, 1000); //we read first 1000 character
+fclose($file);
+$count = abs(intval($count)) + 1;
+echo "You are visitor No. $count!";
+//save file with the new value
+$file = fopen($path, 'w');
+fwrite($file, $count);
+fclose($file);
+
+$file = fopen('mytext.txt', 'r');
+$mystr = fgets($file); //fgets reads until endof line, end of file
+echo "<p>My text: $mystr</p>";
+fclose($file);
+
+$contents = file('mytext.txt');
+var_dump($contents);
+foreach ($contents as $line) {
+    echo $line . "<br>";
+}
