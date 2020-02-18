@@ -1,3 +1,29 @@
 body {
-    background-color: beige;
+    background-color: silver;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.element {
+    width: 100px;
+    height: 100px;
+}
+
+.fizz {
+    background-color: firebrick;
+}
+
+.buzz {
+    background-color: burlywood;
+}
+
+.fizzbuzz {
+    background-color: indianred;
+}
+
+.number {
+    background-color: navajowhite;
 }
