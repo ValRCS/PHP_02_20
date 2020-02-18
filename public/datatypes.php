@@ -1,0 +1,32 @@
+<?php
+require '../src/template/head.php';
+const HR = "<hr>";
+$mybool = true;
+echo $mybool;
+var_dump($mybool);
+$mynum = 42;
+var_dump($mynum);
+$myfloat = 3.14159;
+var_dump($myfloat);
+$myname = "Valdis";
+var_dump($myname);
+echo "<br>$myname is " . strlen($myname) . " characters long";
+$haystack = "kartupelis kartupelis pelis lielais melis";
+$needle = "eli";
+$pos = strpos($haystack, $needle);
+echo "<hr>$needle is first found in ('$haystack') at position $pos ";
+$count = str_word_count($haystack);
+echo "<hr>There are $count words in $haystack";
+$needle = "artu";
+$subcount = substr_count($haystack, $needle);
+echo "<hr>There are $subcount occurences of $needle in $haystack<hr>";
+$chars = str_split($haystack);
+var_dump($chars);
+echo "<hr>";
+$words = explode(" ", $haystack);
+var_dump($words);
+echo HR;
+echo $words[0];
+echo HR;
+
+require '../src/template/footer.php';
