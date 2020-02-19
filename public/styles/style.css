@@ -27,3 +27,15 @@ body {
 .number {
     background-color: navajowhite;
 }
+
+.tracks-container {
+    display: flex;
+    justify-content: center;
+}
+
+.track-cell {
+    display: inline-block;
+    height: 20px;
+    background-color: palegoldenrod;
+    margin: 5px;
+}
