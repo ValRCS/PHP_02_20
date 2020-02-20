@@ -4,9 +4,12 @@ class Model
     const MODELNAME = "Our data store and methods";
     //no need for outsiders to access our connection
     private $conn = null;
+    private $view;
 
-    public function __construct($config)
+    //type hinting that we need to pass View
+    public function __construct($config, View $view)
     {
+        $this->view = $view;
         $server = $config['server'];
         $db = $config['db'];
         $user = $config['user'];
@@ -24,6 +27,7 @@ class Model
         $stmt->execute();
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $allRows = $stmt->fetchAll();
-        var_dump($allRows);
+        //var_dump($allRows);
+        $this->view->printSongs($allRows);
     }
 }
