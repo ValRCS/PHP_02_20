@@ -1,11 +1,6 @@
 <?php
+require_once "../config/config.php";
 require_once "../src/classes/Model.php";
-$config = [
-    "server" => "localhost",
-    "db" => "music02",
-    "user" => "root",
-    "pw" => "",
-];
 
 $model = new Model($config);
 require_once "../src/template/head.php";
