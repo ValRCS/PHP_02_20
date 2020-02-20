@@ -28,9 +28,9 @@ body {
     background-color: navajowhite;
 }
 
-.tracks-container {
+.tracks-cont {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .track-cell {
@@ -41,6 +41,11 @@ body {
 }
 
 .col-fields {
-    background-color: plum;
+    background-color: blanchedalmond;
     margin: 5px;
+}
+
+.tracks-header-cont {
+    display: flex;
+    justify-content: space-between;
 }
