@@ -1,7 +1,9 @@
 <?php
 class Model
 {
-    public $conn = null;
+    const MODELNAME = "Our data store and methods";
+    //no need for outsiders to access our connection
+    private $conn = null;
 
     public function __construct($config)
     {
@@ -13,5 +15,15 @@ class Model
         $this->conn = new PDO("mysql:host=$server;dbname=$db;charset=utf8", $user, $pw);
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         echo "<hr>Connected Successfully!<hr>";
+    }
+
+    public function getSongs($userid = null)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM tracks");
+        //prepare goes here
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $allRows = $stmt->fetchAll();
+        var_dump($allRows);
     }
 }
