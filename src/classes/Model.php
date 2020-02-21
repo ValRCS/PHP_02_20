@@ -23,6 +23,7 @@ class Model
     public function getSongs($songname = null)
     {
         if ($songname) {
+            $songname = "%$songname%";
             $stmt = $this->conn->prepare("SELECT * FROM tracks WHERE name LIKE (:songname)");
             $stmt->bindParam(':songname', $songname);
             //NOT SAFE!! https://xkcd.com/327/
