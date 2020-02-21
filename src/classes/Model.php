@@ -43,8 +43,12 @@ class Model
 
     public function addSongs()
     {
-        $stmt = $this->conn->prepare("INSERT INTO tracks (name, user_id) VALUES (:songname, 1)");
+        $stmt = $this->conn->prepare("INSERT
+                INTO tracks (name, artist, user_id)
+                VALUES (:songname, :artist, 1)");
         $stmt->bindParam(':songname', $_POST['songname']);
+        $stmt->bindParam(':artist', $_POST['artist']);
+
         //INSERT INTO `tracks` (`id`, `name`, `artist`, `album`, `length`, `created`,
         //`updated`, `user_id`) VALUES (NULL, 'Waterloo', 'Abba', 'Eurovision', '180', current_timestamp(), current_timestamp(), '')
         $stmt->execute();
