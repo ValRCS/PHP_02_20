@@ -9,6 +9,8 @@ class View
 
     public function printSongs($songs)
     {
+        require_once "../src/template/head.php";
+        echo "<h1>My Music</h1><hr>";
         echo "<hr>Printing songs</br>";
         // foreach ($songs as $song) {
         //     echo "<br>";
@@ -35,6 +37,7 @@ class View
             }
             echo "</div>";
         }
+        require_once "../src/template/footer.php";
     }
 
 }
