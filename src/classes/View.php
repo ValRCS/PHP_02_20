@@ -18,6 +18,11 @@ class View
         // }
         include "../src/template/add_song_form.php";
         echo "<hr>";
+        if (isset($_GET['songname'])) {
+            $filterValue = $_GET['songname'];
+        } else {
+            $filterValue = "";
+        }
         include "../src/template/song_filter_form.php";
         echo "<hr>";
         $areColumnsSet = false;
