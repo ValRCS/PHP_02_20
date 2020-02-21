@@ -64,4 +64,15 @@ class Model
         $this->getSongs();
         //"DELETE FROM `tracks` WHERE `tracks`.`id` = 14"
     }
+
+    public function updateSongs()
+    {
+        $stmt = $this->conn->prepare("UPDATE tracks SET name = (:songName) WHERE id = (:songid)");
+
+        $stmt->bindParam(':songName', $_POST['name']); //we have <input name="name"
+        $stmt->bindParam(':songid', $_POST['updateBtn']);
+        $stmt->execute();
+        $this->getSongs();
+        //UPDATE `tracks` SET `name` = 'Ziemelmeitajauka' WHERE `tracks`.`id` = 17
+    }
 }

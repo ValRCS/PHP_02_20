@@ -38,10 +38,16 @@ class View
             echo "<form action='index.php' method='post'>";
             $rowid = $row['id'];
             echo "<button type='submit' name='delBtn' value='$rowid'>Delete</button>";
-            echo "</form>";
+            echo "<button type='submit' name='updateBtn' value='$rowid'>Update</button>";
             foreach ($row as $colname => $cell) {
-                echo "<span class='track-cell'>$cell</span>";
+                if ($colname == "name") {
+                    echo "<input type='text' name='name' value='$cell'></input>";
+                } else {
+                    echo "<span class='track-cell'>$cell</span>";
+                }
+
             }
+            echo "</form>";
             echo "</div>";
         }
         require_once "../src/template/footer.php";

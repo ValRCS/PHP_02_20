@@ -23,9 +23,16 @@ class Controller
         // var_dump($_POST);
         if (isset($_POST['addBtn'])) {
             $this->model->addSongs();
-        } else {
+        } elseif (isset($_POST['delBtn'])) {
             // var_dump($_POST);
             $this->model->deleteSongs();
+        } elseif (isset($_POST['updateBtn'])) {
+            $this->model->updateSongs();
+            // var_dump($_POST);
+            // $this->model->updateSongs();
+        } else {
+            echo "What button did you press??";
+            var_dump($_POST);
         }
 
     }
