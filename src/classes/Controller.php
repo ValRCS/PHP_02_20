@@ -19,8 +19,9 @@ class Controller
 
     private function postReq()
     {
-        echo "POST Request<hr>";
-        var_dump($_POST);
+        // echo "POST Request<hr>";
+        // var_dump($_POST);
+        $this->model->addSongs();
     }
 
     public function route()

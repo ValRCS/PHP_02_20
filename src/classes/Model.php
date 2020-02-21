@@ -40,4 +40,14 @@ class Model
         //var_dump($allRows);
         $this->view->printSongs($allRows);
     }
+
+    public function addSongs()
+    {
+        $stmt = $this->conn->prepare("INSERT INTO tracks (name, user_id) VALUES (:songname, 1)");
+        $stmt->bindParam(':songname', $_POST['songname']);
+        //INSERT INTO `tracks` (`id`, `name`, `artist`, `album`, `length`, `created`,
+        //`updated`, `user_id`) VALUES (NULL, 'Waterloo', 'Abba', 'Eurovision', '180', current_timestamp(), current_timestamp(), '')
+        $stmt->execute();
+        $this->getSongs();
+    }
 }
