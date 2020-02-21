@@ -12,7 +12,7 @@
 
 
 
-<button type="submit">SUBMIT</button>
+<button type="submit" name="addBtn">SUBMIT</button>
 
 
 </form>

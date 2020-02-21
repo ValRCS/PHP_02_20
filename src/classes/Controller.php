@@ -21,7 +21,13 @@ class Controller
     {
         // echo "POST Request<hr>";
         // var_dump($_POST);
-        $this->model->addSongs();
+        if (isset($_POST['addBtn'])) {
+            $this->model->addSongs();
+        } else {
+            // var_dump($_POST);
+            $this->model->deleteSongs();
+        }
+
     }
 
     public function route()

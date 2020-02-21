@@ -54,4 +54,14 @@ class Model
         $stmt->execute();
         $this->getSongs();
     }
+
+    public function deleteSongs()
+    {
+        $stmt = $this->conn->prepare("DELETE FROM tracks WHERE id = (:songid)");
+
+        $stmt->bindParam(':songid', $_POST['delBtn']);
+        $stmt->execute();
+        $this->getSongs();
+        //"DELETE FROM `tracks` WHERE `tracks`.`id` = 14"
+    }
 }

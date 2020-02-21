@@ -35,6 +35,10 @@ class View
             echo "<div class='tracks-cont'>";
             // echo "Row: $index";
             // print_r($row);
+            echo "<form action='index.php' method='post'>";
+            $rowid = $row['id'];
+            echo "<button type='submit' name='delBtn' value='$rowid'>Delete</button>";
+            echo "</form>";
             foreach ($row as $colname => $cell) {
                 echo "<span class='track-cell'>$cell</span>";
             }
