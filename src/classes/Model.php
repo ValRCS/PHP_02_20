@@ -20,9 +20,18 @@ class Model
         // echo "<hr>Connected Successfully!<hr>";
     }
 
-    public function getSongs($userid = null)
+    public function getSongs($songname = null)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM tracks");
+        if ($songname) {
+            $stmt = $this->conn->prepare("SELECT * FROM tracks WHERE name LIKE (:songname)");
+            $stmt->bindParam(':songname', $songname);
+            //NOT SAFE!! https://xkcd.com/327/
+            // $stmt = $this->conn->prepare("SELECT * FROM tracks WHERE name LIKE '%$songname%'");
+
+        } else {
+            $stmt = $this->conn->prepare("SELECT * FROM tracks");
+        }
+
         //prepare goes here
         $stmt->execute();
         $stmt->setFetchMode(PDO::FETCH_ASSOC);

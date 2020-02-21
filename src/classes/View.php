@@ -16,6 +16,7 @@ class View
         //     echo "<br>";
         //     print_r($song);
         // }
+        include "../src/template/song_filter_form.php";
         echo "<hr>";
         $areColumnsSet = false;
 
