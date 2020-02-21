@@ -67,9 +67,15 @@ class Model
 
     public function updateSongs()
     {
-        $stmt = $this->conn->prepare("UPDATE tracks SET name = (:songName) WHERE id = (:songid)");
+        $stmt = $this->conn->prepare("UPDATE tracks
+                SET name = (:songName),
+                artist = (:artist),
+                updated = CURRENT_TIMESTAMP()
+                WHERE id = (:songid)");
 
         $stmt->bindParam(':songName', $_POST['name']); //we have <input name="name"
+        $stmt->bindParam(':artist', $_POST['artist']); //we have <input name="artist"
+
         $stmt->bindParam(':songid', $_POST['updateBtn']);
         $stmt->execute();
         $this->getSongs();

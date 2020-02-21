@@ -45,11 +45,23 @@ class View
             echo "<button type='submit' name='delBtn' value='$rowid'>Delete</button>";
             echo "<button type='submit' name='updateBtn' value='$rowid'>Update</button>";
             foreach ($row as $colname => $cell) {
-                if ($colname == "name") {
-                    echo "<input type='text' name='name' value='$cell'></input>";
-                } else {
-                    echo "<span class='track-cell'>$cell</span>";
+                switch ($colname) {
+                    case "name":
+                        echo "<input class='track-cell' type='text' name='name' value='$cell'></input>";
+                        break;
+                    case "artist":
+                        echo "<input class='track-cell' type='text' name='artist' value='$cell'></input>";
+                        break;
+                    default:
+                        echo "<span class='track-cell'>$cell</span>";
+                        break;
                 }
+                //we wrote the below if as switch above
+                // if ($colname == "name") {
+                //     echo "<input type='text' name='name' value='$cell'></input>";
+                // } else {
+                //     echo "<span class='track-cell'>$cell</span>";
+                // }
 
             }
             echo "</form>";
