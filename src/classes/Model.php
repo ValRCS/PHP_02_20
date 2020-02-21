@@ -24,7 +24,9 @@ class Model
     {
         if ($songname) {
             $songname = "%$songname%";
-            $stmt = $this->conn->prepare("SELECT * FROM tracks WHERE name LIKE (:songname)");
+            $stmt = $this->conn->prepare("SELECT *
+                FROM tracks
+                WHERE name LIKE (:songname)");
             $stmt->bindParam(':songname', $songname);
             //NOT SAFE!! https://xkcd.com/327/
             // $stmt = $this->conn->prepare("SELECT * FROM tracks WHERE name LIKE '%$songname%'");
@@ -36,6 +38,7 @@ class Model
         //prepare goes here
         $stmt->execute();
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        //fetchAll might not be that good for large datasets
         $allRows = $stmt->fetchAll();
         //var_dump($allRows);
         $this->view->printSongs($allRows);
