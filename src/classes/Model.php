@@ -95,6 +95,21 @@ class Model
     public function getId($username)
     {
         //return user id or 0 if no such user
+        $stmt = $this->conn->prepare("SELECT
+        id FROM users
+        WHERE (name = :name)
+    ");
+        $stmt->bindParam(':name', $username);
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll();
+        if (count($result) > 0) {
+            // var_dump($result);
+            // die("For now");
+            return $result[0]['id'];
+        } else {
+            return 0;
+        }
     }
 
     public function getHash($username)

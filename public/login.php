@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (password_verify($_POST['pw'], $hash)) {
         echo "You are good to go! consider yourself logged in ";
         $_SESSION['user'] = $_POST['username'];
+        $_SESSION['id'] = $model->getId($_POST['username']);
     } else {
         echo "Not so good, either user or password is incorrect";
     }
