@@ -48,7 +48,7 @@ class Model
     {
         $stmt = $this->conn->prepare("INSERT
                 INTO tracks (name, artist, album, length, user_id)
-                VALUES (:songname, :artist, :album, :length, 1)");
+                VALUES (:songname, :artist, :album, :length, 1)"); //TODO add real user id not fixed
         $stmt->bindParam(':songname', $_POST['songname']);
         $stmt->bindParam(':artist', $_POST['artist']);
         $stmt->bindParam(':album', $_POST['album']);
