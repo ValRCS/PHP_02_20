@@ -1,0 +1,23 @@
+<?php
+session_start();
+require_once "../config/config.php";
+require_once "../src/classes/Model.php";
+require_once "../src/classes/View.php";
+require_once "../src/classes/Controller.php";
+
+$view = new View();
+$model = new Model($config, $view);
+$controller = new Controller($model);
+// $controller->route();  //TODO add real route later
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // var_dump($_POST);
+    $hash = $model->getHash($_POST['username']);
+    if (password_verify($_POST['pw'], $hash)) {
+        echo "You are good to go! consider yourself logged in ";
+        $_SESSION['user'] = $_POST['username'];
+    } else {
+        echo "Not so good, either user or password is incorrect";
+    }
+    //select name and hash from DB
+    //password_verify user entry against the hash
+}

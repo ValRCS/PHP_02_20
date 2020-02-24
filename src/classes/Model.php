@@ -92,19 +92,35 @@ class Model
         $this->view->printRegister();
     }
 
-    public function addNewUser()
+    public function getId($username)
+    {
+        //return user id or 0 if no such user
+    }
+
+    public function getHash($username)
     {
         $stmt = $this->conn->prepare("SELECT
-            name FROM users
-            WHERE (name = :name)
-        ");
-        $stmt->bindParam(':name', $_POST['username']);
+        hash FROM users
+        WHERE (name = :name)
+    ");
+        $stmt->bindParam(':name', $username);
         $stmt->execute();
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $result = $stmt->fetchAll();
-        // var_dump($result);
         if (count($result) > 0) {
+            // var_dump($result);
+            // die("For now");
+            return $result[0]['hash'];
+        } else {
+            return 0;
+        }
+    }
+
+    public function addNewUser()
+    {
+        if ($this->getHash($_POST['username']) != 0) {
             // die("Got this user already");
+            //or possible bad hash
             header('Location: /register.php');
             exit();
         }
