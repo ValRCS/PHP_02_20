@@ -91,4 +91,18 @@ class Model
     {
         $this->view->printRegister();
     }
+
+    public function addNewUser()
+    {
+        $stmt = $this->conn->prepare("INSERT INTO `users`
+            (`id`, `name`, `email`, `hash`, `created`)
+            VALUES (NULL, :name, :email, :hash, current_timestamp())");
+        $stmt->bindParam(':name', $_POST['username']);
+        $stmt->bindParam(':email', $_POST['email']);
+        $hash = password_hash($_POST['pw1'], PASSWORD_DEFAULT);
+        $stmt->bindParam(':hash', $hash);
+
+        $stmt->execute();
+        echo "Adding new user with the hash: $hash";
+    }
 }
