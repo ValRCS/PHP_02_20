@@ -94,6 +94,22 @@ class Model
 
     public function addNewUser()
     {
+        $stmt = $this->conn->prepare("SELECT
+            name FROM users
+            WHERE (name = :name)
+        ");
+        $stmt->bindParam(':name', $_POST['username']);
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll();
+        // var_dump($result);
+        if (count($result) > 0) {
+            // die("Got this user already");
+            header('Location: /register.php');
+            exit();
+        }
+
+        //https://stackoverflow.com/questions/1361340/how-to-insert-if-not-exists-in-mysql
         $stmt = $this->conn->prepare("INSERT INTO `users`
             (`id`, `name`, `email`, `hash`, `created`)
             VALUES (NULL, :name, :email, :hash, current_timestamp())");
@@ -103,6 +119,6 @@ class Model
         $stmt->bindParam(':hash', $hash);
 
         $stmt->execute();
-        echo "Adding new user with the hash: $hash";
+        $this->view->printRegister();
     }
 }
