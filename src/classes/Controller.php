@@ -10,6 +10,12 @@ class Controller
 
     private function getReq()
     {
+        if (basename($_SERVER['PHP_SELF']) === 'register.php') {
+            echo "Processing register get";
+            $this->model->getRegister();
+            return;
+        }
+
         if (isset($_GET['songname'])) {
             $this->model->getSongs($_GET['songname']);
         } else {
@@ -19,6 +25,11 @@ class Controller
 
     private function postReq()
     {
+        if (basename($_SERVER['PHP_SELF']) === 'register.php') {
+            echo "Processing register post";
+            return;
+        }
+
         // echo "POST Request<hr>";
         // var_dump($_POST);
         if (isset($_POST['addBtn'])) {

@@ -86,4 +86,9 @@ class Model
         $this->getSongs();
         //UPDATE `tracks` SET `name` = 'Ziemelmeitajauka' WHERE `tracks`.`id` = 17
     }
+
+    public function getRegister()
+    {
+        $this->view->printRegister();
+    }
 }

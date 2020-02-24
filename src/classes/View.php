@@ -10,6 +10,7 @@ class View
     public function printSongs($songs)
     {
         require_once "../src/template/head.php";
+        require_once "../src/template/header.php";
         echo "<h1>My Music</h1><hr>";
         // echo "<hr>Printing songs</br>";
         // foreach ($songs as $song) {
@@ -68,6 +69,15 @@ class View
             echo "</div>";
         }
         require_once "../src/template/footer.php";
+    }
+
+    public function printRegister()
+    {
+        require_once "../src/template/head.php";
+        require_once "../src/template/header.php";
+        require_once "../src/template/register_inputs.php";
+        require_once "../src/template/footer.php";
+
     }
 
 }
