@@ -22,17 +22,26 @@ class Model
 
     public function getSongs($songname = null)
     {
+        if (!isset($_SESSION['id'])) {
+            die("Need to figure out what to show when user is not logged in");
+            //consider not doing anything maybe
+        }
         if ($songname) {
             $songname = "%$songname%";
             $stmt = $this->conn->prepare("SELECT *
                 FROM tracks
-                WHERE name LIKE (:songname)");
+                WHERE name LIKE (:songname)
+                AND (user_id = :uid)");
             $stmt->bindParam(':songname', $songname);
+            $stmt->bindParam(':uid', $_SESSION['id']);
             //NOT SAFE!! https://xkcd.com/327/
             // $stmt = $this->conn->prepare("SELECT * FROM tracks WHERE name LIKE '%$songname%'");
 
         } else {
-            $stmt = $this->conn->prepare("SELECT * FROM tracks");
+            $stmt = $this->conn->prepare("SELECT * FROM tracks
+                WHERE (user_id = :uid)
+            ");
+            $stmt->bindParam(':uid', $_SESSION['id']);
         }
 
         //prepare goes here
@@ -46,13 +55,18 @@ class Model
 
     public function addSongs()
     {
+        if (!isset($_SESSION['id'])) {
+            die("NOt going to add songs before log in");
+            //consider not doing anything maybe
+        }
         $stmt = $this->conn->prepare("INSERT
                 INTO tracks (name, artist, album, length, user_id)
-                VALUES (:songname, :artist, :album, :length, 1)"); //TODO add real user id not fixed
+                VALUES (:songname, :artist, :album, :length, :userid)"); //TODO add real user id not fixed
         $stmt->bindParam(':songname', $_POST['songname']);
         $stmt->bindParam(':artist', $_POST['artist']);
         $stmt->bindParam(':album', $_POST['album']);
         $stmt->bindParam(':length', $_POST['songlen']);
+        $stmt->bindParam(':userid', $_SESSION['id']);
 
         //INSERT INTO `tracks` (`id`, `name`, `artist`, `album`, `length`, `created`,
         //`updated`, `user_id`) VALUES (NULL, 'Waterloo', 'Abba', 'Eurovision', '180', current_timestamp(), current_timestamp(), '')
