@@ -49,8 +49,17 @@ class Controller
 
     }
 
+    private function checkCookie()
+    {
+        if (isset($_COOKIE['uid'])) {
+            $_SESSION['id'] = $_COOKIE['uid']; //NOT SAFE need to encrypt and check against encrypted version!
+        }
+        //TODO check on safety for setting session id directly
+    }
+
     public function route()
     {
+        $this->checkCookie();
         //GETS are for retrieval only
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $this->getReq();
