@@ -53,6 +53,13 @@ class View
                     case "artist":
                         echo "<input class='track-cell' type='text' name='artist' value='$cell'></input>";
                         break;
+                    case "img_loc":
+                        if ($cell) {
+                            echo "<img src='$cell' alt='cool pic' width='100' heigth='100'>";
+                        } else {
+                            echo "<span>No Pic!</span>";
+                        }
+                        break;
                     default:
                         echo "<span class='track-cell'>$cell</span>";
                         break;

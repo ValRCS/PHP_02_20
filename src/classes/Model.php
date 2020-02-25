@@ -93,11 +93,16 @@ class Model
 // if everything is ok, try to upload file
         } else {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";
+                //echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";
             } else {
                 echo "Sorry, there was an error uploading your file.";
             }
 
+        }
+        if ($uploadOk) {
+            return $target_file;
+        } else {
+            return null;
         }
     }
 
@@ -107,20 +112,22 @@ class Model
             die("NOt going to add songs before log in");
             //consider not doing anything maybe
         }
+        $target_file = null;
         if ($_FILES["fileToUpload"]) {
-            $this->saveImg();
-            var_dump($_FILES);
-            die('should have saved a file');
+            $target_file = $this->saveImg();
+            // var_dump($_FILES);
+            // die('should have saved a file');
         }
 
         $stmt = $this->conn->prepare("INSERT
-                INTO tracks (name, artist, album, length, user_id)
-                VALUES (:songname, :artist, :album, :length, :userid)"); //TODO add real user id not fixed
+                INTO tracks (name, artist, album, length, user_id, img_loc)
+                VALUES (:songname, :artist, :album, :length, :userid, :img_loc)"); //TODO add real user id not fixed
         $stmt->bindParam(':songname', $_POST['songname']);
         $stmt->bindParam(':artist', $_POST['artist']);
         $stmt->bindParam(':album', $_POST['album']);
         $stmt->bindParam(':length', $_POST['songlen']);
         $stmt->bindParam(':userid', $_SESSION['id']);
+        $stmt->bindParam(':img_loc', $target_file);
 
         //INSERT INTO `tracks` (`id`, `name`, `artist`, `album`, `length`, `created`,
         //`updated`, `user_id`) VALUES (NULL, 'Waterloo', 'Abba', 'Eurovision', '180', current_timestamp(), current_timestamp(), '')
