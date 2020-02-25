@@ -22,8 +22,10 @@ class Model
 
     public function getSongs($songname = null)
     {
-        if (!isset($_SESSION['id'])) {
-            die("Need to figure out what to show when user is not logged in");
+        $userid = 0; //we assume we are not logged in yet
+        if (isset($_SESSION['id'])) {
+            // die("Need to figure out what to show when user is not logged in");
+            $userid = $_SESSION['id'];
             //consider not doing anything maybe
         }
         if ($songname) {
@@ -33,7 +35,7 @@ class Model
                 WHERE name LIKE (:songname)
                 AND (user_id = :uid)");
             $stmt->bindParam(':songname', $songname);
-            $stmt->bindParam(':uid', $_SESSION['id']);
+            $stmt->bindParam(':uid', $userid);
             //NOT SAFE!! https://xkcd.com/327/
             // $stmt = $this->conn->prepare("SELECT * FROM tracks WHERE name LIKE '%$songname%'");
 
@@ -41,7 +43,7 @@ class Model
             $stmt = $this->conn->prepare("SELECT * FROM tracks
                 WHERE (user_id = :uid)
             ");
-            $stmt->bindParam(':uid', $_SESSION['id']);
+            $stmt->bindParam(':uid', $userid);
         }
 
         //prepare goes here
