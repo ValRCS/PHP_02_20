@@ -78,9 +78,16 @@ class Model
 
     public function deleteSongs()
     {
-        $stmt = $this->conn->prepare("DELETE FROM tracks WHERE id = (:songid)");
+        if (!isset($_SESSION['id'])) {
+            return;
+        }
+
+        $stmt = $this->conn->prepare("DELETE FROM tracks
+            WHERE id = (:songid)
+            AND user_id = (:userid)");
 
         $stmt->bindParam(':songid', $_POST['delBtn']);
+        $stmt->bindParam(':userid', $_SESSION['id']);
         $stmt->execute();
         $this->getSongs();
         //"DELETE FROM `tracks` WHERE `tracks`.`id` = 14"

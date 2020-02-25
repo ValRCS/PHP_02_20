@@ -1,3 +1,6 @@
+<?php
+if (isset($_SESSION['id'])) {
+    ?>
 <form action="index.php" method="post">
 
 <label for="songname">Song</label>
@@ -9,10 +12,8 @@
 <label for="songlen">Duration</label>
 <input type="text" name="songlen">
 
-
-
-
 <button type="submit" name="addBtn">SUBMIT</button>
-
-
 </form>
+<?php
+}
+?>
