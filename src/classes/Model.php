@@ -52,6 +52,7 @@ class Model
         //fetchAll might not be that good for large datasets
         $allRows = $stmt->fetchAll();
         //var_dump($allRows);
+        //die("For now");
         $this->view->printSongs($allRows);
     }
 
