@@ -233,6 +233,10 @@ class Model
         $stmt->bindParam(':hash', $hash);
 
         $stmt->execute();
-        $this->view->printRegister();
+
+        $_SESSION['user'] = $_POST['username'];
+        $_SESSION['id'] = $this->getId($_POST['username']);
+
+        $this->getSongs();
     }
 }
