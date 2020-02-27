@@ -43,7 +43,10 @@ class View
             // print_r($row);
             echo "<form action='index.php' method='post'>";
             $rowid = $row['id'];
-            echo "<button type='submit' name='delBtn' value='$rowid'>Delete</button>";
+            echo "<input type='hidden' name='delForm' value='$rowid'>";
+            echo "<button type='submit' class='del-Btn' name='delBtn' value='$rowid' id='del-$rowid'>Delete</button>";
+            echo "</form>";
+            echo "<form action='index.php' method='post'>";
             echo "<button type='submit' name='updateBtn' value='$rowid'>Update</button>";
             foreach ($row as $colname => $cell) {
                 switch ($colname) {

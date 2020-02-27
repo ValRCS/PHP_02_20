@@ -38,7 +38,7 @@ class Controller
         // var_dump($_POST);
         if (isset($_POST['addBtn'])) {
             $this->model->addSongs();
-        } elseif (isset($_POST['delBtn'])) {
+        } elseif (isset($_POST['delForm'])) {
             // var_dump($_POST);
             $this->model->deleteSongs();
         } elseif (isset($_POST['updateBtn'])) {

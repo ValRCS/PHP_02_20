@@ -49,3 +49,7 @@ body {
     display: flex;
     justify-content: space-between;
 }
+
+.fading {
+    background-color: orange;
+}

@@ -150,7 +150,7 @@ class Model
             WHERE id = (:songid)
             AND user_id = (:userid)");
 
-        $stmt->bindParam(':songid', $_POST['delBtn']);
+        $stmt->bindParam(':songid', $_POST['delForm']);
         $stmt->bindParam(':userid', $_SESSION['id']);
         $stmt->execute();
         $this->getSongs();
