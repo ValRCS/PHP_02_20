@@ -41,6 +41,7 @@ class View
             echo "<div class='tracks-cont'>";
             // echo "Row: $index";
             // print_r($row);
+            echo "Song No: $index";
             echo "<form action='index.php' method='post'>";
             $rowid = $row['id'];
             echo "<input type='hidden' name='delForm' value='$rowid'>";
@@ -50,6 +51,9 @@ class View
             echo "<button type='submit' name='updateBtn' value='$rowid'>Update</button>";
             foreach ($row as $colname => $cell) {
                 switch ($colname) {
+                    case "id":
+                        //do not show ids
+                        break;
                     case "name":
                         echo "<input class='track-cell' type='text' name='name' value='$cell'></input>";
                         break;
