@@ -114,7 +114,11 @@ class Model
             //consider not doing anything maybe
         }
         $target_file = null;
-        if ($_FILES["fileToUpload"]) {
+        //we check file name for existance
+        //https://stackoverflow.com/questions/2958167/how-to-test-if-a-user-has-selected-a-file-to-upload
+        if (!empty($_FILES["fileToUpload"]["name"])) {
+            // var_dump($_FILES["fileToUpload"]);
+            // die();
             $target_file = $this->saveImg();
             // var_dump($_FILES);
             // die('should have saved a file');
