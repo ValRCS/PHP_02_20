@@ -16,6 +16,7 @@ class Controller
             return;
         }
 
+        //so this would be default index.php
         if (isset($_GET['songname'])) {
             $this->model->getSongs($_GET['songname']);
         } else {
